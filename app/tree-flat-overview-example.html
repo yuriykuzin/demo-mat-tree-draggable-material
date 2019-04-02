@@ -1,0 +1,40 @@
+<h2>Topic 1. The Big Bang Theory</h2>
+<h5>(draggable powered by CDK)</h5>
+
+<mat-tree [dataSource]="dataSource" 
+          [treeControl]="treeControl"
+          cdkDropList 
+          (cdkDropListDropped)="drop($event)">
+
+  <!-- This is the tree node template for leaf nodes -->
+  <mat-tree-node *matTreeNodeDef="let node" 
+                 matTreeNodePadding
+                 cdkDrag 
+                 [cdkDragData]="node">
+
+    <!-- use a disabled button to provide padding for tree leaf -->
+    <button mat-icon-button disabled></button>
+    {{node.name}}
+  </mat-tree-node>
+
+  <!-- This is the tree node template for expandable nodes -->
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" 
+                 matTreeNodePadding
+                 cdkDrag 
+                 [cdkDragData]="node">
+
+    <button mat-icon-button matTreeNodeToggle
+            [attr.aria-label]="'toggle ' + node.name">
+      <mat-icon class="mat-icon-rtl-mirror fork-icon"
+                [class.fork-icon--expanded]="treeControl.isExpanded(node)">
+        call_split
+      </mat-icon>
+    </button>
+    {{node.name}}
+  </mat-tree-node>
+</mat-tree>
+
+
+<!-- Copyright 2019 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

@@ -1,0 +1,8 @@
+.fork-icon {
+  transition: .2s transform;
+  transform: rotate(90deg);  
+}
+
+.fork-icon--expanded {
+  transform: rotate(180deg);
+}
