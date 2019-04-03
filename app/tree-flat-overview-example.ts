@@ -4,10 +4,11 @@ import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 
 
 export class ItemNode {
-  id?: string;
+  id: number;
   children?: ItemNode[];
   name: string;  
 }
+
 
 /** Flat node with expandable and level information */
 export class ItemFlatNode {
@@ -22,23 +23,30 @@ export class ItemFlatNode {
 
 const TREE_DATA = [
   {
+    id: 1,
     name: 'Welcome word',    
   }, {
+    id: 2,
     name: 'How do they do it?',    
   },
   {
+    id: 3,
     name: 'Do you want to learn more?',
     children: [
       {
+        id: 4,
         name: 'The most important secret',        
       }, 
       {
+        id: 5,
         name: 'Way to success',
       }
     ]
   }, {
+    id: 6,
     name: 'Per aspera ad astra',    
   }, {
+    id: 7,
     name: 'Listen and repeat',    
   },
 
@@ -47,6 +55,7 @@ const TREE_DATA = [
 /** Flat node with expandable and level information */
 interface ExampleFlatNode {
   expandable: boolean;
+  id: number;
   name: string;
   level: number;
 }
@@ -63,7 +72,8 @@ export class TreeFlatOverviewExample {
   private transformer = (node: ItemNode, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
-      name: node.name,
+      id: node.id,
+      name: node.name,      
       level: level,
     };
   }
@@ -81,6 +91,22 @@ export class TreeFlatOverviewExample {
   }
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+
+  public drop(event) {
+    console.log('Previous index:', event.previousIndex);    
+    console.log('Current index:', event.currentIndex);    
+    console.log('Is pointer over container? ', event.isPointerOverContainer);
+    console.log(this.dataSource);
+
+    // debugger;
+  }
+
+  move(
+    cdkDragMoved
+  ) {
+    console.log(cdkDragMoved.source.element);    
+  }
+    
 }
 
 

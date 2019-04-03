@@ -6,15 +6,22 @@
           cdkDropList 
           (cdkDropListDropped)="drop($event)">
 
-  <!-- This is the tree node template for leaf nodes -->
+  <!-- This is the tree node template for leaf nodes -->  
   <mat-tree-node *matTreeNodeDef="let node" 
                  matTreeNodePadding
                  cdkDrag 
-                 [cdkDragData]="node">
+                 [cdkDragData]="node"
+                 (cdkDragMoved)="move($event)">
 
     <!-- use a disabled button to provide padding for tree leaf -->
-    <button mat-icon-button disabled></button>
+    <button mat-icon-button disabled></button>    
+    
     {{node.name}}
+    
+    <div class="example-custom-placeholder" 
+         *cdkDragPlaceholder>
+         {{node.name}}
+    </div>
   </mat-tree-node>
 
   <!-- This is the tree node template for expandable nodes -->
